@@ -1,5 +1,4 @@
 import background from "../Images/background-auth.jpg";
-import { Link } from "react-router-dom";
 import { CiMail } from "react-icons/ci";
 
 function ForgotPassword() {
