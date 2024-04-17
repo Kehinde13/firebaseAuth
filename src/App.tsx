@@ -3,7 +3,6 @@ import Login from "./Auth/Login"
 import AuthLayout from "./Auth/AuthLayout"
 import SignUp from "./Auth/SignUp"
 import ForgotPassword from "./Auth/ForgotPassword"
-import ProtectedRoutes from "./Auth/ProtectedRoutes"
 import Homepage from "./Homepage"
 import { ToastContainer } from "react-toastify"
 
@@ -29,14 +28,9 @@ function App() {
       }
     ]
   }, 
-  {
-    element: <ProtectedRoutes />,
-    children: [
-      {
-        path: "homepage",
-        element: <Homepage />
-      }
-    ]
+  {  
+    path: "homepage",
+    element: <Homepage />   
   }
  ])
 
