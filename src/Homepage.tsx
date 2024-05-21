@@ -44,13 +44,14 @@ function Homepage() {
       alert("No user is signed in.");
     }
   }, [user]);
+
   return (
     <div>
       <div className="w-[300px] mx-auto mt-20">
         <img
           src={user?.photoURL ? user?.photoURL : profileImg}
           alt=""
-          className="w-[50%] rounded-full mx-auto"
+          className="w-[50%] rounded-full mx-auto "
         />
         <h1 className="text-center text-3xl font-bold my-5">
           {user?.displayName}
