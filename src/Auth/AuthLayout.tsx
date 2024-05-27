@@ -1,9 +1,13 @@
-import { Outlet } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { Navigate, Outlet } from 'react-router-dom'
+import { getCurrentUser } from './authSlice'
 
 function AuthLayout() {
-  //use useSelector check ofr the user
-  //if user object is empty redirect the user to login page
-  // else allow the user into the app
+  const currentUser = useSelector(getCurrentUser)
+
+  if(currentUser){
+    return <Navigate to="/homePage" replace />;
+  }
   return (
     <Outlet />
   )

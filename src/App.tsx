@@ -5,6 +5,7 @@ import SignUp from "./Auth/SignUp"
 import ForgotPassword from "./Auth/ForgotPassword"
 import Homepage from "./Homepage"
 import { ToastContainer } from "react-toastify"
+import ProtectedRoute from "./Auth/ProtectedRoute"
 
 
 function App() {
@@ -29,8 +30,13 @@ function App() {
     ]
   }, 
   {  
-    path: "homepage",
-    element: <Homepage />   
+    element: <ProtectedRoute />,
+    children: [
+      {
+        path: "homepage",
+        element: <Homepage />
+      }
+    ]  
   }
  ])
 

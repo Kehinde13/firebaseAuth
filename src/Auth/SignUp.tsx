@@ -5,10 +5,11 @@ import { CiMail } from "react-icons/ci";
 import background from "../Images/background-auth.jpg";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { auth } from "./Firebase";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth, db } from "./Firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import GoogleSignIn from "../hooks/GoogleSignIn";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
 interface FormState {
   firstName: string;
@@ -55,12 +56,21 @@ function SignUp() {
         form.password
       );
 
-      updateProfile(user, {
-        displayName: form.firstName,
-      });
+      const docRef = doc(db, "users", user.uid);
 
-      toast.success("Sign Up Successful, Please login");
-      Navigate("/");
+      const userDoc = await getDoc(docRef);
+
+      if (!userDoc.exists()) {
+        await setDoc(docRef, {
+          userId: user.uid,
+          username: form.firstName,
+          email: form.Email,
+          userImg: "",
+          bio: "",
+        });
+        toast.success("Sign Up Successful");
+        Navigate("/");
+      }
     } catch (error) {
       toast.error((error as Error).message);
     }
